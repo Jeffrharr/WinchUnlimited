@@ -7,13 +7,14 @@
     <GameDir>$(HOME)/.local/share/Steam/steamapps/common/over the hill</GameDir>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="$(GameDir)/BepInEx/core/BepInEx.Core.dll" Private="false" />
-    <Reference Include="$(GameDir)/BepInEx/core/BepInEx.Unity.IL2CPP.dll" Private="false" />
-    <Reference Include="$(GameDir)/BepInEx/core/Il2CppInterop.Runtime.dll" Private="false" />
-    <Reference Include="$(GameDir)/BepInEx/core/0Harmony.dll" Private="false" />
-    <Reference Include="$(GameDir)/BepInEx/interop/*.dll" Private="false" />
+    <Reference Include="$(GameDir)/MelonLoader/net6/MelonLoader.dll" Private="false" />
+    <Reference Include="$(GameDir)/MelonLoader/net6/Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="$(GameDir)/MelonLoader/net6/Il2CppInterop.Common.dll" Private="false" />
+    <Reference Include="$(GameDir)/MelonLoader/Il2CppAssemblies/*.dll" Private="false" />
+    <!-- Shared hooks and networking; build ../OverTheHillCore first -->
+    <Reference Include="$(GameDir)/UserLibs/OverTheHillCore.dll" Private="false" />
   </ItemGroup>
   <Target Name="Deploy" AfterTargets="Build">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)/BepInEx/plugins" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)/Mods" />
   </Target>
 </Project>
