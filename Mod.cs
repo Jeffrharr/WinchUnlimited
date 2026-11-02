@@ -60,13 +60,15 @@ static class Net
     static readonly Dictionary<int, WinchSettings> remote = new();
     static string lastSent;
 
+    // Players without the mod (or who left) get the stock winch
     public static WinchSettings GetRemoteWinchSettings(int playerId) =>
-        remote.TryGetValue(playerId, out var s) ? s : null;
+        HillNet.PlayerHas(playerId, Channel) && remote.TryGetValue(playerId, out var s) ? s : null;
 
     internal static void Register()
     {
         HillNet.Register<WinchSettings>(Channel, OnReceive);
         HillNet.SessionReset += () => { remote.Clear(); lastSent = null; };
+        HillNet.PlayerLeft += id => remote.Remove(id);
     }
 
     // Clients: (re)send whenever the host is ready or the config changes mid-session
