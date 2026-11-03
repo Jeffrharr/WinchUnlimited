@@ -29,7 +29,7 @@ public class Mod : MelonMod
             "Shortest the rope can be reeled in to, in metres. Don't go to 0, the physics can explode.");
         NoStall = c.CreateEntry("NoStall", true, description: "Stop the winch stalling or slipping under heavy load.");
         ReelSpeedMultiplier = c.CreateEntry("ReelSpeedMultiplier", 1f, description: "Multiplier for winch reel speed (1 = game default).");
-        MaxExtension = c.CreateEntry("MaxExtension", 500f, description:
+        MaxExtension = c.CreateEntry("MaxExtension", 9000f, description:
             "How far (m) the rope can be paid out once attached. Attaching still uses the game's normal range. 0 = game default.");
 
         Net.Register();

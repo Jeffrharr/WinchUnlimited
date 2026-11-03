@@ -3,7 +3,7 @@
 A [MelonLoader](https://github.com/LavaGang/MelonLoader) mod for Over the Hill that removes the winch's limits.
 
 - Reel in all the way, with no stalling or slipping under heavy load.
-- Pay the rope out up to 500 m once attached. You still attach using the game's normal range.
+- Pay the rope out up to 9000 m once attached. You still attach using the game's normal range.
 - Optional faster reel.
 
 Works with [RealisticWinch](https://github.com/Jeffrharr/RealisticWinch). Requires JoofFramework, the shared HillModding library.
@@ -30,7 +30,7 @@ LD_LIBRARY_PATH="$PWD" LD_PRELOAD="MelonLoader.Bootstrap.so" DOTNET_ROOT="$HOME/
 | `MinRopeLength` | `0.3` | Shortest the rope reels in to, in metres. Don't set 0: the physics can explode |
 | `NoStall` | `true` | The winch doesn't stall or slip under heavy load |
 | `ReelSpeedMultiplier` | `1` | Reel speed multiplier (1 = game default) |
-| `MaxExtension` | `500` | How far (m) the rope pays out once attached (0 = game default) |
+| `MaxExtension` | `9000` | How far (m) the rope pays out once attached (0 = game default) |
 
 Multiplayer: everyone should install it. The host runs the physics, so the host needs it. Each player's settings are sent to the host, which applies them to that player's winch.
 
