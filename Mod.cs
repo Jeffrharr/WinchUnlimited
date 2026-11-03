@@ -4,7 +4,7 @@ using Il2CppFusion;
 using MelonLoader;
 using JoofOTHFramework;
 
-[assembly: MelonInfo(typeof(WinchUnlimited.Mod), "WinchUnlimited", "1.0.0", "HillModding")]
+[assembly: MelonInfo(typeof(WinchUnlimited.Mod), "WinchUnlimited", "1.0.0", "Joof")]
 [assembly: MelonGame("Funselektor", "over the hill")]
 
 namespace WinchUnlimited;
