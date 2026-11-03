@@ -38,6 +38,7 @@ public class Mod : MelonMod
 
     public override void OnUpdate()
     {
+        if (Core.Quitting) return;
         HillNet.Tick();
         Net.Tick();
     }
