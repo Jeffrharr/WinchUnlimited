@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Il2CppFusion;
 using MelonLoader;
-using OverTheHillCore;
+using JoofFramework;
 
 [assembly: MelonInfo(typeof(WinchUnlimited.Mod), "WinchUnlimited", "1.0.0", "HillModding")]
 [assembly: MelonGame("Funselektor", "over the hill")]

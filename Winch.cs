@@ -16,7 +16,7 @@ public class WinchSettings
 // The game runs in host mode: the host simulates every car's winch, and clients may
 // predict their own. So the host applies each modded player's settings to that
 // player's winch, and clients apply their own settings locally for prediction.
-// Runs at the start of each winch tick through OverTheHillCore's shared winch hook.
+// Runs at the start of each winch tick through JoofFramework's shared winch hook.
 static class WinchPatch
 {
     class Defaults { public float MinRope, Stall, MaxTension, ReelSpeed; public bool Slip; }
