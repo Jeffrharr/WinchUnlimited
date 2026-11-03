@@ -2,6 +2,8 @@
 
 ![WinchUnlimited](media/title.png)
 
+Download: [Nexus Mods](https://www.nexusmods.com/overthehill/mods/117) (mod 117, file 340).
+
 A [MelonLoader](https://github.com/LavaGang/MelonLoader) mod for Over the Hill that removes the winch's limits.
 
 - Reel in all the way, with no stalling or slipping under heavy load.
