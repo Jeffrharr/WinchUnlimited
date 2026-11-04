@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Text.Json;
 using Il2CppFusion;
 using MelonLoader;
 using JoofOTHFramework;
 
-[assembly: MelonInfo(typeof(WinchUnlimited.Mod), "WinchUnlimited", "1.0.0", "Joof")]
+[assembly: MelonInfo(typeof(WinchUnlimited.Mod), "WinchUnlimited", "1.1.0", "Joof")]
 [assembly: MelonGame("Funselektor", "over the hill")]
 
 namespace WinchUnlimited;
@@ -40,7 +39,6 @@ public class Mod : MelonMod
     {
         if (Core.Quitting) return;
         HillNet.Tick();
-        Net.Tick();
     }
 
     internal static WinchSettings LocalWinchSettings() => new()
@@ -59,7 +57,6 @@ static class Net
     const string Channel = "WinchUnlimited";
 
     static readonly Dictionary<int, WinchSettings> remote = new();
-    static string lastSent;
 
     // Players without the mod (or who left) get the stock winch
     public static WinchSettings GetRemoteWinchSettings(int playerId) =>
@@ -68,20 +65,22 @@ static class Net
     internal static void Register()
     {
         HillNet.Register<WinchSettings>(Channel, OnReceive);
-        HillNet.SessionReset += () => { remote.Clear(); lastSent = null; };
+        HillNet.SessionReset += () => remote.Clear();
         HillNet.PlayerLeft += id => remote.Remove(id);
+        // Clients: send when the host answers, and again whenever a setting changes mid-session
+        HillNet.HostReady += Send;
+        Mod.Enabled.OnEntryValueChanged.Subscribe((_, _) => Send());
+        Mod.MinRopeLength.OnEntryValueChanged.Subscribe((_, _) => Send());
+        Mod.NoStall.OnEntryValueChanged.Subscribe((_, _) => Send());
+        Mod.ReelSpeedMultiplier.OnEntryValueChanged.Subscribe((_, _) => Send());
+        Mod.MaxExtension.OnEntryValueChanged.Subscribe((_, _) => Send());
     }
 
-    // Clients: (re)send whenever the host is ready or the config changes mid-session
-    internal static void Tick()
+    static void Send()
     {
         var runner = HillNet.Runner;
         if (runner == null || runner.IsServer || !HillNet.HostHas(Channel)) return;
-        var s = Mod.LocalWinchSettings();
-        var json = JsonSerializer.Serialize(s);
-        if (json == lastSent) return;
-        lastSent = json;
-        HillNet.SendToHost(Channel, s);
+        HillNet.SendToHost(Channel, Mod.LocalWinchSettings());
     }
 
     static void OnReceive(NetworkRunner runner, PlayerRef from, WinchSettings s)
